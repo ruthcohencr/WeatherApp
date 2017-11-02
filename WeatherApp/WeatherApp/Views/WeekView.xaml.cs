@@ -13,10 +13,10 @@ namespace WeatherApp.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class WeekView : ContentPage
 	{
-		public WeekView (string cityName,List<Datum2> weatherForWeek)
+		public WeekView (string cityName,string jsonResult)
 		{
 			InitializeComponent ();
-            BindingContext = new WeekViewModel(cityName, weatherForWeek,Navigation);
+            BindingContext = new WeekViewModel(cityName, jsonResult, Navigation);
 		}
 	}
 }

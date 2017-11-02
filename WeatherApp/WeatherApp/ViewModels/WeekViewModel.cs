@@ -31,7 +31,7 @@ namespace WeatherApp.ViewModels
         //private double _temperatureMin;
         //private ICommand _goBackCommand;
 
-        public WeekViewModel(string cityName,List<Datum2> weatherForWeek,INavigation navigation)
+        public WeekViewModel(string cityName,string jsonResult,INavigation navigation)
             :base(navigation)
         {
             _cityNameText = cityName;

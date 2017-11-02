@@ -1,15 +1,15 @@
-﻿using System;
+﻿using WeatherApp.Models;
+using WeatherApp.Views;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
-using Newtonsoft.Json;
-using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WeatherApp.Models;
-using WeatherApp.Views;
 using Xamarin.Forms;
-using System.Net.Http;
+using System.Linq;
 
 namespace WeatherApp.ViewModels
 {
@@ -25,7 +25,7 @@ namespace WeatherApp.ViewModels
         private ICommand _showTempCommand;
         private int UnixTime { get; set; } = 255589200;
         private string _loadingText;
-        public List<Datum2> DailyDetails;
+        public List<Datum2> DailyDetails { get; set; }
         public double TemperatureMin;
 
         public string LoadingText
@@ -62,9 +62,9 @@ namespace WeatherApp.ViewModels
             {
                 try
                 {
-                    var url = string.Format(BaseAddress, model.Latitude, model.Longitude, UnixTime);
-                    string result = await client.GetStringAsync(url);
-                    var jsonedModel = JsonConvert.DeserializeObject<WeatherModel>(result.ToString());
+                    var url = string.Format(BaseAddress, model.Latitude, model.Longitude);
+                    string jsonResult = await client.GetStringAsync(url);
+                    var jsonedModel = JsonConvert.DeserializeObject<WeatherModel>(jsonResult.ToString());
 
                     LoadingText = string.Empty;
                     DailyDetails = jsonedModel.daily.data;
@@ -79,7 +79,7 @@ namespace WeatherApp.ViewModels
 
                     //});
 
-                    await navigation.PushAsync(new WeekView(model.CityName, DailyDetails));
+                    await navigation.PushAsync(new WeekView(model.CityName, jsonResult));
                 }
                 catch (Exception ex)
                 {
