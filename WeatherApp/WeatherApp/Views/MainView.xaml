@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.Views.MainView">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center">
+            <Label Text="{Binding Title}"
+                   HorizontalOptions="Center"/>
+
+
+            <ListView VerticalOptions="Fill"
+                  HorizontalOptions="Fill"
+                  x:Name="CitiesListView"
+                  ItemsSource="{Binding GetCitiesList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Button Text="{Binding CityName}"
+                                Command="{Binding BindingContext.ShowTempCommand, Source={x:Reference CitiesListView1}}}"
+                                CommandParameter="{Binding .}"
+                                VerticalOptions="Fill"
+                                HorizontalOptions="Fill"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView VerticalOptions="Fill"
+                  HorizontalOptions="Fill"
+                  x:Name="DailyListDetails"
+                  ItemsSource="{Binding DailyDetails}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Button Text="{Binding TemperatureMin}"
+                                Command="{Binding BindingContext.ShowTempCommand, Source={x:Reference DailyListDetails}}}"
+                                CommandParameter="{Binding .}"
+                                VerticalOptions="Fill"
+                                HorizontalOptions="Fill"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!--<ListView VerticalOptions="Fill"
+                      HorizontalOptions="Fill"
+                      x:Name="DailyListDetails"
+                      ItemsSource="{Binding DailyDetails}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Button Text="{Binding TemperatureMin}"
+                                Command="{Binding BindingContext.ShowTempCommand, Source={x:Reference CitiesListView}}}"
+                                CommandParameter="{Binding .}"
+                                VerticalOptions="Fill"
+                                HorizontalOptions="Fill"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
