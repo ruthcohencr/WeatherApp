@@ -19,6 +19,8 @@ namespace WeatherApp.ViewModels
     //    private const string BaseAddress = "https://api.darksky.net/forecast/cbcd2c87dcbf63941d36d326cc40b1f1/{0},{1},{2}?units=si";
 
         private IEnumerable<CityModel> _citiesList;
+        private Action<string> _onError;
+
         public string Title { get; set; }
         private ICommand _showTempCommand;
         private int UnixTime { get; set; } = 255589200;
@@ -68,7 +70,7 @@ namespace WeatherApp.ViewModels
                     DailyDetails = jsonedModel.daily.data;
                     var today = DailyDetails.First();
                     TemperatureMin = today.TemperatureMin;
-                   
+
                     //CityNameText = SelectedCityModel.Name;
                     //TemperatureText = model.currently.temperature.ToString();
 
@@ -77,18 +79,20 @@ namespace WeatherApp.ViewModels
 
                     //});
 
-                    //await navigation.PushAsync(new WeekView(model.CityName, jsonedModel.currently.temperature.ToString()));
+                    await navigation.PushAsync(new WeekView(model.CityName, DailyDetails));
                 }
                 catch (Exception ex)
                 {
-                    //_onError("נכשל ניסיון עדכון מזג אוויר. אנא נסו שנית מאוחר יותר.");
+                    _onError("נכשל ניסיון טעינת מזג האוויר לשבוע הקרוב. אנא נסו שוב מאוחר יותר.");
                     return;
                 }
             }
         }
 
-        public MainViewModel()
+        public MainViewModel(Action<string> onError,INavigation navigation)
+            :base(navigation)
         {
+            _onError = onError;
 
             Title = "תחזית מזג האויר";
             _citiesList = new List<CityModel>

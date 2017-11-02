@@ -16,15 +16,15 @@
                     <DataTemplate>
                         <ViewCell>
                             <Button Text="{Binding CityName}"
-                                Command="{Binding BindingContext.ShowTempCommand, Source={x:Reference CitiesListView1}}}"
+                                Command="{Binding BindingContext.ShowTempCommand, Source={x:Reference CitiesListView}}}"
                                 CommandParameter="{Binding .}"
-                                VerticalOptions="Fill"
-                                HorizontalOptions="Fill"/>
+                                HorizontalOptions="Fill"
+                                VerticalOptions="Fill"/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <ListView VerticalOptions="Fill"
+            <!--<ListView VerticalOptions="Fill"
                   HorizontalOptions="Fill"
                   x:Name="DailyListDetails"
                   ItemsSource="{Binding DailyDetails}">
@@ -39,7 +39,7 @@
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </ListView>-->
 
             <!--<ListView VerticalOptions="Fill"
                       HorizontalOptions="Fill"

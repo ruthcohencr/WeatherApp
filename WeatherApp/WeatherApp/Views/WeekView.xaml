@@ -4,7 +4,9 @@
              x:Class="WeatherApp.Views.WeekView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
+            <Label Text="Conect to Darksky - this week news" />
+            <Label Text="{Binding CityNameText}"
+                   HorizontalOptions="Center"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

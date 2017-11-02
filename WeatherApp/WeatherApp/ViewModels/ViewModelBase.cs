@@ -10,12 +10,14 @@ namespace WeatherApp.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
+        protected INavigation navigation;
+
         // protected INavigation navigation;
 
-        //public ViewModelBase(INavigation navigation)
-        //{
-        //    this.navigation = navigation;
-        //}
+        public ViewModelBase(INavigation navigation)
+        {
+            this.navigation = navigation;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

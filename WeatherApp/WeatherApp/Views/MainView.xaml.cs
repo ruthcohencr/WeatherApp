@@ -15,7 +15,13 @@ namespace WeatherApp.Views
         public MainView()
         {
             InitializeComponent();
-            BindingContext = new MainViewModel();
+            BindingContext = new MainViewModel(OnError, Navigation);
+
         }
+        private void OnError(string message)
+        {
+            DisplayAlert("שגיאה", message, "אישור");
+        }
+
     }
 }
