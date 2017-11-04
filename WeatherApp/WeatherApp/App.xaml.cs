@@ -13,7 +13,7 @@ namespace WeatherApp
         {
             InitializeComponent();
 
-            MainPage = new WeatherApp.Views.MainView();
+            MainPage = new NavigationPage(new WeatherApp.Views.MainView());
         }
 
         protected override void OnStart()

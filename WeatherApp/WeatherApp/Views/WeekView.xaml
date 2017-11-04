@@ -4,9 +4,29 @@
              x:Class="WeatherApp.Views.WeekView">
     <ContentPage.Content>
         <StackLayout>
+            <Label Text="{Binding CityNameText}"></Label>
             <Label Text="Conect to Darksky - this week news" />
-            <Label Text="{Binding CityNameText}"
-                   HorizontalOptions="Center"/>
+            <TableView>
+                <TableView.Root>
+                    <TableSection Title="Test">
+                        <EntryCell Label="EntryCell"></EntryCell>
+                        <TextCell Text="Test"></TextCell>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal" >
+                                    <BoxView Color="Red"></BoxView>
+                                    <StackLayout>
+                                        <Label Text="News Item 1"></Label>
+                                        <Label Text="News URL 1"></Label>
+                                    </StackLayout>
+                                    <BoxView x:Name="boxView" Color="Blue" ></BoxView>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </TableSection>
+                </TableView.Root>
+            </TableView>
+           
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

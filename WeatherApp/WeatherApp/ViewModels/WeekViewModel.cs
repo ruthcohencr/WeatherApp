@@ -29,7 +29,17 @@ namespace WeatherApp.ViewModels
         //private string _temperatureText;
         //private double _temperatureMax;
         //private double _temperatureMin;
-        //private ICommand _goBackCommand;
+        private ICommand _goBackCommand;
+
+        public ICommand GoBackCommand
+        {
+            get { return _goBackCommand ?? (_goBackCommand = new Command(GoBackCommandAction)); }
+        }
+
+        private async void GoBackCommandAction(object obj)
+        {
+            await navigation.PopAsync();
+        }
 
         public WeekViewModel(string cityName,string jsonResult,INavigation navigation)
             :base(navigation)
