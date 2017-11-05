@@ -42,6 +42,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>-->
                 <StackLayout>
+                    <Label Text="{Binding DayOfWeek}" TextColor="White"/>
                     <ListView BackgroundColor="White"                     
                       x:Name="weatherForWeek"
                       ItemsSource="{Binding WeatherForWeek}">
@@ -49,25 +50,36 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout Orientation="Horizontal" BackgroundColor="Black" Padding="20" Margin="2">
+                                        <StackLayout>
+                                            <Label Text="Day" TextColor="Yellow"/>
+                                            <Label Text="{Binding DayOfWeek}" TextColor="White"/>
+                                            <!--Text="{Binding Source={x:Static s:DateTime.Now},
+                                            ConverterCulture={x:Static c:CultureInfo.CurrentCulture}, StringFormat=Date: {0:dddd, MMMM dd}}"/>-->
+                                        </StackLayout>
                                         <StackLayout Orientation="Vertical">
-                                            <Label Text=": טמפרטורה מינימלית" TextColor="Yellow"/>
+                                            <Label Text="Low Temperature" TextColor="Yellow"/>
                                             <Label Text="{Binding TemperatureLow}" TextColor="White" />
                                         </StackLayout>
-
-                                        <Label Text=": טמפרטורה מקסימלית" TextColor="Yellow"/>
-                                        <Label Text="{Binding TemperatureHigh}" TextColor="White"/>
-                                        <Label Text=": מהירות הרוח" TextColor="Yellow"/>
-                                        <Label Text="{Binding WindSpeed}" TextColor="White"/>
-
+                                        <StackLayout>
+                                            <Label Text="High Temperature" TextColor="Yellow"/>
+                                            <Label Text="{Binding TemperatureHigh}" TextColor="White"/>
+                                        </StackLayout>
+                                        <StackLayout>
+                                            <Label Text="Wind Speed" TextColor="Yellow"/>
+                                            <Label Text="{Binding WindSpeed}" TextColor="White"/>
+                                        </StackLayout>
 
                                         <Label Text="{Binding Icon}" TextColor="White"/>
+                                        <StackLayout>
+                                            <Label Text="Humidity %" TextColor="Yellow"/>
+                                            <Label Text="{Binding Humidity}" TextColor="White"/>
+                                        </StackLayout>
 
-                                        <Label Text=": אחוזי הלחות להיום" TextColor="Yellow"/>
-                                        <Label Text="{Binding Humidity}" TextColor="White"/>
+                                        <StackLayout>
+                                            <Label Text="Summery" TextColor="Yellow"/>
+                                            <Label Text="{Binding Summary}" TextColor="White"/>
+                                        </StackLayout>
 
-                                        <Label Text=": סיכום" TextColor="Yellow"/>
-                                        <Label Text="{Binding Summary}" TextColor="White"/>
-                                        <Label Text="{Binding Time}" TextColor="White"/>
 
                                     </StackLayout>
                                 </ViewCell>
@@ -76,9 +88,10 @@
                     </ListView>
                 </StackLayout>
                 <StackLayout>
-                    <Button Text="חזור אחורה"
-                          Command="{Binding BindingContext.ShowTempCommand, Source={x:Reference CitiesListView}}}"
-                                CommandParameter="{Binding .}"/>
+                    <Button Text="Go Back"
+                            Command="{Binding BindingContext.GoBackCommand, Source={x:Reference weatherForWeek}}}"
+                            CommandParameter="{Binding .}"
+                            HorizontalOptions="Fill"/>
                 </StackLayout>
             </StackLayout>
         </Grid>

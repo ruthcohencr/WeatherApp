@@ -11,7 +11,7 @@ namespace WeatherApp.ViewModels
 {
     public class WeekViewModel:ViewModelBase
     {
-
+        private DayOfWeek _dayOfWeek;
         private string _cityNameText;
         //private MainViewModel _mainViewModel;
 
@@ -27,6 +27,7 @@ namespace WeatherApp.ViewModels
                 OnPropertyChanged("CityNameText");
             }
         }
+
 
         private List<Datum2> _weaterForWeek;
 
@@ -44,7 +45,15 @@ namespace WeatherApp.ViewModels
         //private double _temperatureMax;
         //private double _temperatureMin;
         private ICommand _goBackCommand;
-
+        public DayOfWeek DayOfWeek
+        {
+            get { return _dayOfWeek; }
+            set
+            {
+                _dayOfWeek = value;
+                OnPropertyChanged("DayOfWeek");
+            }
+        }
         public ICommand GoBackCommand
         {
             get { return _goBackCommand ?? (_goBackCommand = new Command(GoBackCommandAction)); }
@@ -61,6 +70,10 @@ namespace WeatherApp.ViewModels
            
             _cityNameText = cityName;
             _weaterForWeek = dailyDetails;
+            DayOfWeek dayOfWeek = DateTime.Now.DayOfWeek;
+            DayOfWeek = dayOfWeek;
+            _dateTime = DateTime.Now;
+          
         }
 
         
