@@ -146,8 +146,8 @@ namespace WeatherApp.Models
 
     public class Datum
     {
-        public int time { get; set; }
-        public string summary { get; set; }
+        public int Time { get; set; }
+        public string Summary { get; set; }
         public string icon { get; set; }
         public double precipIntensity { get; set; }
         public double precipProbability { get; set; }
@@ -175,7 +175,7 @@ namespace WeatherApp.Models
 
     public class Datum2
     {
-        public int time { get; set; }
+        public int Time { get; set; }
         public string Summary { get; set; }
         public string Icon { get; set; }
         public int sunriseTime { get; set; }

@@ -2,11 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WeatherApp.Views.WeekView">
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Conect to Darksky - this week news" />
-            <Label Text="{Binding CityNameText}"></Label>
-            <TableView>
+        <Grid>
+            <StackLayout HorizontalOptions="Center">
+                <Label Text="Conect to Darksky - this week news" />
+                <Label Text="{Binding CityNameText}"></Label>
+                <!--<TableView>
                 <TableView.Root>
                     <TableSection Title="Test">
                         <ViewCell>
@@ -30,43 +32,56 @@
 
                     </TableSection>
                 </TableView.Root>
-            </TableView>
+            </TableView>-->
 
-            <!--<StackLayout>
-                <Button Text="חזור אחורה"/>
-            </StackLayout>-->
-
-            <StackLayout>
-                <ListView BackgroundColor="Aqua"                     
+                <!--<Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>-->
+                <StackLayout>
+                    <ListView BackgroundColor="White"                     
                       x:Name="weatherForWeek"
                       ItemsSource="{Binding WeatherForWeek}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="20" Margin="2">
-                                    <Label Text=": טמפרטורה מינימלית"/>
-                                    <Label Text="{Binding TemperatureLow}" />
-                                    <Label Text=": טמפרטורה מקסימלית"/>
-                                    <Label Text="{Binding TemperatureHigh}"/>
-                                    <Label Text=": מהירות הרוח"/>
-                                    <Label Text="{Binding WindSpeed}"/>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" BackgroundColor="Black" Padding="20" Margin="2">
+                                        <StackLayout Orientation="Vertical">
+                                            <Label Text=": טמפרטורה מינימלית" TextColor="Yellow"/>
+                                            <Label Text="{Binding TemperatureLow}" TextColor="White" />
+                                        </StackLayout>
 
-                                  
-                                    <Label Text="{Binding Icon}"/>
+                                        <Label Text=": טמפרטורה מקסימלית" TextColor="Yellow"/>
+                                        <Label Text="{Binding TemperatureHigh}" TextColor="White"/>
+                                        <Label Text=": מהירות הרוח" TextColor="Yellow"/>
+                                        <Label Text="{Binding WindSpeed}" TextColor="White"/>
 
-                                    <Label Text=": אחוזי הלחות להיום"/>
-                                    <Label Text="{Binding Humidity}"/>
 
-                                    <Label Text=": סיכום"/>
-                                    <Label Text="{Binding Summery}"/>
+                                        <Label Text="{Binding Icon}" TextColor="White"/>
 
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                                        <Label Text=": אחוזי הלחות להיום" TextColor="Yellow"/>
+                                        <Label Text="{Binding Humidity}" TextColor="White"/>
+
+                                        <Label Text=": סיכום" TextColor="Yellow"/>
+                                        <Label Text="{Binding Summary}" TextColor="White"/>
+                                        <Label Text="{Binding Time}" TextColor="White"/>
+
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+                <StackLayout>
+                    <Button Text="חזור אחורה"
+                          Command="{Binding BindingContext.ShowTempCommand, Source={x:Reference CitiesListView}}}"
+                                CommandParameter="{Binding .}"/>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
-
+        </Grid>
     </ContentPage.Content>
+
 </ContentPage>
