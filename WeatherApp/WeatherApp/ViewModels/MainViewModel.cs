@@ -79,7 +79,7 @@ namespace WeatherApp.ViewModels
 
                     //});
 
-                    await navigation.PushAsync(new WeekView(model.CityName, jsonResult));
+                    await navigation.PushAsync(new WeekView(model.CityName, jsonResult, DailyDetails));
                 }
                 catch (Exception ex)
                 {

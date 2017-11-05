@@ -176,8 +176,8 @@ namespace WeatherApp.Models
     public class Datum2
     {
         public int time { get; set; }
-        public string summary { get; set; }
-        public string icon { get; set; }
+        public string Summary { get; set; }
+        public string Icon { get; set; }
         public int sunriseTime { get; set; }
         public int sunsetTime { get; set; }
         public double moonPhase { get; set; }
@@ -186,18 +186,18 @@ namespace WeatherApp.Models
         public int precipIntensityMaxTime { get; set; }
         public double precipProbability { get; set; }
         public string precipType { get; set; }
-        public double temperatureHigh { get; set; }
+        public double TemperatureHigh { get; set; }
         public int temperatureHighTime { get; set; }
-        public double temperatureLow { get; set; }
+        public double TemperatureLow { get; set; }
         public int temperatureLowTime { get; set; }
         public double apparentTemperatureHigh { get; set; }
         public int apparentTemperatureHighTime { get; set; }
         public double apparentTemperatureLow { get; set; }
         public int apparentTemperatureLowTime { get; set; }
         public double dewPoint { get; set; }
-        public double humidity { get; set; }
+        public double Humidity { get; set; }
         public double pressure { get; set; }
-        public double windSpeed { get; set; }
+        public double WindSpeed { get; set; }
         public double windGust { get; set; }
         public int windGustTime { get; set; }
         public int windBearing { get; set; }

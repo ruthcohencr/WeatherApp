@@ -4,29 +4,69 @@
              x:Class="WeatherApp.Views.WeekView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding CityNameText}"></Label>
             <Label Text="Conect to Darksky - this week news" />
+            <Label Text="{Binding CityNameText}"></Label>
             <TableView>
                 <TableView.Root>
                     <TableSection Title="Test">
-                        <EntryCell Label="EntryCell"></EntryCell>
-                        <TextCell Text="Test"></TextCell>
                         <ViewCell>
                             <ViewCell.View>
-                                <StackLayout Orientation="Horizontal" >
-                                    <BoxView Color="Red"></BoxView>
+                                <StackLayout Orientation="Vertical">
+                                    <BoxView Color="Green"></BoxView>
                                     <StackLayout>
-                                        <Label Text="News Item 1"></Label>
+                                        <Label Text="{Binding WeatherForWeek[0].TemperatureLow}"></Label>
                                         <Label Text="News URL 1"></Label>
                                     </StackLayout>
                                     <BoxView x:Name="boxView" Color="Blue" ></BoxView>
+                                    <StackLayout>
+                                        <Label Text="News Item 2"></Label>
+                                        <Label Text="{Binding WeatherForWeek[1].TemperatureLow}"></Label>
+                                    </StackLayout>
+                                  
+
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>
+
                     </TableSection>
                 </TableView.Root>
             </TableView>
-           
+
+            <!--<StackLayout>
+                <Button Text="חזור אחורה"/>
+            </StackLayout>-->
+
+            <StackLayout>
+                <ListView BackgroundColor="Aqua"                     
+                      x:Name="weatherForWeek"
+                      ItemsSource="{Binding WeatherForWeek}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="20" Margin="2">
+                                    <Label Text=": טמפרטורה מינימלית"/>
+                                    <Label Text="{Binding TemperatureLow}" />
+                                    <Label Text=": טמפרטורה מקסימלית"/>
+                                    <Label Text="{Binding TemperatureHigh}"/>
+                                    <Label Text=": מהירות הרוח"/>
+                                    <Label Text="{Binding WindSpeed}"/>
+
+                                  
+                                    <Label Text="{Binding Icon}"/>
+
+                                    <Label Text=": אחוזי הלחות להיום"/>
+                                    <Label Text="{Binding Humidity}"/>
+
+                                    <Label Text=": סיכום"/>
+                                    <Label Text="{Binding Summery}"/>
+
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
         </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>

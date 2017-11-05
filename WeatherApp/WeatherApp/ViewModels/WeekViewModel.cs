@@ -11,7 +11,9 @@ namespace WeatherApp.ViewModels
 {
     public class WeekViewModel:ViewModelBase
     {
+
         private string _cityNameText;
+        //private MainViewModel _mainViewModel;
 
         public string CityNameText
         {
@@ -23,6 +25,18 @@ namespace WeatherApp.ViewModels
             {
                 _cityNameText = value;
                 OnPropertyChanged("CityNameText");
+            }
+        }
+
+        private List<Datum2> _weaterForWeek;
+
+        public List<Datum2> WeatherForWeek
+        {
+            get { return _weaterForWeek; }
+            set
+            {
+                _weaterForWeek = value;
+                OnPropertyChanged("WeatherForWeek");
             }
         }
         //private string _cityNameText;
@@ -41,10 +55,12 @@ namespace WeatherApp.ViewModels
             await navigation.PopAsync();
         }
 
-        public WeekViewModel(string cityName,string jsonResult,INavigation navigation)
+        public WeekViewModel(string cityName,string jsonResult, List<Datum2> dailyDetails, INavigation navigation)
             :base(navigation)
         {
+           
             _cityNameText = cityName;
+            _weaterForWeek = dailyDetails;
         }
 
         
