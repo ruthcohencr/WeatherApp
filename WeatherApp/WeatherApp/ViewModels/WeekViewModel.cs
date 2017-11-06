@@ -9,12 +9,21 @@ using Xamarin.Forms;
 
 namespace WeatherApp.ViewModels
 {
-    public class WeekViewModel:ViewModelBase
+    public class WeekViewModel : ViewModelBase
     {
         private DayOfWeek _dayOfWeek;
         private string _cityNameText;
         //private MainViewModel _mainViewModel;
 
+        private List<string> _weatherDay;
+        public List<string> WeatherDay
+        {
+            get { return _weatherDay; }
+            set
+            {
+                _weatherDay = value;
+            }
+        }
         public string CityNameText
         {
             get
@@ -29,22 +38,19 @@ namespace WeatherApp.ViewModels
         }
 
 
-        private List<Datum2> _weaterForWeek;
-
+        private List<Datum2> _weatherForWeek;
         public List<Datum2> WeatherForWeek
         {
-            get { return _weaterForWeek; }
+            get { return _weatherForWeek; }
             set
             {
-                _weaterForWeek = value;
+                _weatherForWeek = value;
                 OnPropertyChanged("WeatherForWeek");
             }
         }
-        //private string _cityNameText;
-        //private string _temperatureText;
-        //private double _temperatureMax;
-        //private double _temperatureMin;
+
         private ICommand _goBackCommand;
+        public DateTime Date { get; set; }
         public DayOfWeek DayOfWeek
         {
             get { return _dayOfWeek; }
@@ -64,18 +70,33 @@ namespace WeatherApp.ViewModels
             await navigation.PopAsync();
         }
 
-        public WeekViewModel(string cityName,string jsonResult, List<Datum2> dailyDetails, INavigation navigation)
-            :base(navigation)
+        public WeekViewModel(string cityName, string jsonResult, List<Datum2> dailyDetails, INavigation navigation)
+            : base(navigation)
         {
-           
+
             _cityNameText = cityName;
-            _weaterForWeek = dailyDetails;
-            DayOfWeek dayOfWeek = DateTime.Now.DayOfWeek;
-            DayOfWeek = dayOfWeek;
-            _dateTime = DateTime.Now;
-          
+            _weatherForWeek = dailyDetails;
+            WeatherDay = GetListWeatherDay();
         }
 
-        
+        public List<string> GetListWeatherDay()
+        {
+            List<string> weatherDays = new List<string>();
+            var today = DateTime.Now;
+            //set list[0] to be the day of today
+            weatherDays.Add(today.DayOfWeek.ToString());
+
+            // how many days do i have ahead
+            var length = WeatherForWeek.Count;
+
+            for (int i = 1; i < length; i++)
+            {
+                string nameOfDay = today.AddDays(1).DayOfWeek.ToString();
+                weatherDays.Add(nameOfDay);
+            }
+
+            return weatherDays;
+        }
+
     }
 }

@@ -52,10 +52,20 @@
                                     <StackLayout Orientation="Horizontal" BackgroundColor="Black" Padding="20" Margin="2">
                                         <StackLayout>
                                             <Label Text="Day" TextColor="Yellow"/>
-                                            <Label Text="{Binding DayOfWeek}" TextColor="White"/>
+                                            <Label Text="{Binding Day, Mode=TwoWay, StringFormat={}{0:dddd}}" TextColor="White"/>
+                                            <Label Text="{Binding Date, Mode=TwoWay, StringFormat={}{0:dddd}}" TextColor="White"/>
                                             <!--Text="{Binding Source={x:Static s:DateTime.Now},
                                             ConverterCulture={x:Static c:CultureInfo.CurrentCulture}, StringFormat=Date: {0:dddd, MMMM dd}}"/>-->
                                         </StackLayout>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="7*" />
+                                                <RowDefinition Height="3*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="0" VerticalOptions="Fill" Text="Day" TextColor="Yellow" ></Label>
+                                            <Label Grid.Row="1" VerticalOptions="Fill" Text="{Binding DayOfWeek}" TextColor="White"></Label>
+                                           
+                                        </Grid>
                                         <StackLayout Orientation="Vertical">
                                             <Label Text="Low Temperature" TextColor="Yellow"/>
                                             <Label Text="{Binding TemperatureLow}" TextColor="White" />
