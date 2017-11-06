@@ -5,9 +5,17 @@
 
     <ContentPage.Content>
         <Grid>
-            <StackLayout HorizontalOptions="CenterAndExpand">
-                <Label Text="Conect to Darksky - this week news" />
-                <Label Text="{Binding CityNameText}"></Label>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="1">
+                <Label Text="Conect to Darksky - this week news"
+                       FontSize="Medium"/>
+                <Label Text="{Binding CityNameText}"
+                       FontSize="Medium"
+                       HorizontalOptions="Center"></Label>
                 <!--<TableView>
                 <TableView.Root>
                     <TableSection Title="Test">
@@ -43,7 +51,8 @@
                 </Grid.RowDefinitions>-->
                 <StackLayout>
                     <Label Text="{Binding DayOfWeek}" TextColor="White"/>
-                    <ListView BackgroundColor="White"                     
+                    <ListView BackgroundColor="White"     
+                  
                       x:Name="weatherForWeek"
                       ItemsSource="{Binding WeatherForWeek}">
                         <ListView.ItemTemplate>
@@ -51,7 +60,7 @@
                                 <ViewCell>
                                     <StackLayout Orientation="Horizontal" BackgroundColor="Black" Padding="20" Margin="2">
                                         <StackLayout>
-                                            <Label Text="Day" TextColor="Yellow"/>
+                                            <Label Text="Day" TextColor="Yellow" />
                                             <Label Text="{Binding NameOfDay}" TextColor="White"/>
                                         </StackLayout>
                                         <!--<Grid>
@@ -75,8 +84,10 @@
                                             <Label Text="Wind Speed" TextColor="Yellow"/>
                                             <Label Text="{Binding WindSpeed}" TextColor="White"/>
                                         </StackLayout>
-
-                                        <Label Text="{Binding Icon}" TextColor="Yellow"/>
+                                        <StackLayout>
+                                            <Label Text="{Binding Icon}" TextColor="Yellow"/>
+                                            <Image Source="D:\Documents\Visual Studio 2017\Xamarin\WeatherApp\WeatherApp\WeatherApp\WeatherApp\Images\partlyCloudy.jpg"></Image>
+                                        </StackLayout>
                                         <StackLayout>
                                             <Label Text="%Humidity" TextColor="Yellow"/>
                                             <Label Text="{Binding Humidity}" TextColor="White"/>
