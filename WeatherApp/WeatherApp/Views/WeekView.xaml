@@ -5,7 +5,7 @@
 
     <ContentPage.Content>
         <Grid>
-            <StackLayout HorizontalOptions="Center">
+            <StackLayout HorizontalOptions="CenterAndExpand">
                 <Label Text="Conect to Darksky - this week news" />
                 <Label Text="{Binding CityNameText}"></Label>
                 <!--<TableView>
@@ -52,20 +52,17 @@
                                     <StackLayout Orientation="Horizontal" BackgroundColor="Black" Padding="20" Margin="2">
                                         <StackLayout>
                                             <Label Text="Day" TextColor="Yellow"/>
-                                            <Label Text="{Binding Day, Mode=TwoWay, StringFormat={}{0:dddd}}" TextColor="White"/>
-                                            <Label Text="{Binding Date, Mode=TwoWay, StringFormat={}{0:dddd}}" TextColor="White"/>
-                                            <!--Text="{Binding Source={x:Static s:DateTime.Now},
-                                            ConverterCulture={x:Static c:CultureInfo.CurrentCulture}, StringFormat=Date: {0:dddd, MMMM dd}}"/>-->
+                                            <Label Text="{Binding NameOfDay}" TextColor="White"/>
                                         </StackLayout>
-                                        <Grid>
+                                        <!--<Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="7*" />
                                                 <RowDefinition Height="3*"/>
                                             </Grid.RowDefinitions>
                                             <Label Grid.Row="0" VerticalOptions="Fill" Text="Day" TextColor="Yellow" ></Label>
-                                            <Label Grid.Row="1" VerticalOptions="Fill" Text="{Binding DayOfWeek}" TextColor="White"></Label>
+                                            <Label Grid.Row="1" VerticalOptions="Fill" Text="{Binding NameOfDay}" TextColor="White"></Label>
                                            
-                                        </Grid>
+                                        </Grid>-->
                                         <StackLayout Orientation="Vertical">
                                             <Label Text="Low Temperature" TextColor="Yellow"/>
                                             <Label Text="{Binding TemperatureLow}" TextColor="White" />
@@ -79,9 +76,9 @@
                                             <Label Text="{Binding WindSpeed}" TextColor="White"/>
                                         </StackLayout>
 
-                                        <Label Text="{Binding Icon}" TextColor="White"/>
+                                        <Label Text="{Binding Icon}" TextColor="Yellow"/>
                                         <StackLayout>
-                                            <Label Text="Humidity %" TextColor="Yellow"/>
+                                            <Label Text="%Humidity" TextColor="Yellow"/>
                                             <Label Text="{Binding Humidity}" TextColor="White"/>
                                         </StackLayout>
 
@@ -89,7 +86,6 @@
                                             <Label Text="Summery" TextColor="Yellow"/>
                                             <Label Text="{Binding Summary}" TextColor="White"/>
                                         </StackLayout>
-
 
                                     </StackLayout>
                                 </ViewCell>

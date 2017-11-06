@@ -172,6 +172,16 @@ namespace WeatherApp.Models
         public string icon { get; set; }
         public List<Datum> data { get; set; }
     }
+    public class MinDatum2
+    {
+        public string Summary { get; set; }
+        public string Icon { get; set; }
+        public double TemperatureHigh { get; set; }
+        public double TemperatureLow { get; set; }
+        public double Humidity { get; set; }
+        public double WindSpeed { get; set; }
+        public string NameOfDay { get; set; }
+    }
 
     public class Datum2
     {

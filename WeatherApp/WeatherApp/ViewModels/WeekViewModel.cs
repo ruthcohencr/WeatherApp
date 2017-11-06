@@ -13,7 +13,8 @@ namespace WeatherApp.ViewModels
     {
         private DayOfWeek _dayOfWeek;
         private string _cityNameText;
-        //private MainViewModel _mainViewModel;
+
+        private List<Datum2> _dailyDetails;
 
         private List<string> _weatherDay;
         public List<string> WeatherDay
@@ -38,8 +39,8 @@ namespace WeatherApp.ViewModels
         }
 
 
-        private List<Datum2> _weatherForWeek;
-        public List<Datum2> WeatherForWeek
+        private List<MinDatum2> _weatherForWeek;
+        public List<MinDatum2> WeatherForWeek
         {
             get { return _weatherForWeek; }
             set
@@ -50,16 +51,16 @@ namespace WeatherApp.ViewModels
         }
 
         private ICommand _goBackCommand;
-        public DateTime Date { get; set; }
-        public DayOfWeek DayOfWeek
-        {
-            get { return _dayOfWeek; }
-            set
-            {
-                _dayOfWeek = value;
-                OnPropertyChanged("DayOfWeek");
-            }
-        }
+        //public DateTime Date { get; set; }
+        //public DayOfWeek DayOfWeek
+        //{
+        //    get { return _dayOfWeek; }
+        //    set
+        //    {
+        //        _dayOfWeek = value;
+        //        OnPropertyChanged("DayOfWeek");
+        //    }
+        //}
         public ICommand GoBackCommand
         {
             get { return _goBackCommand ?? (_goBackCommand = new Command(GoBackCommandAction)); }
@@ -75,8 +76,35 @@ namespace WeatherApp.ViewModels
         {
 
             _cityNameText = cityName;
-            _weatherForWeek = dailyDetails;
+            //_weatherForWeek = dailyDetails;
+            _dailyDetails = dailyDetails;
             WeatherDay = GetListWeatherDay();
+            WeatherForWeek = GetListIncludingNameOfDays();
+        }
+
+        private List<MinDatum2> GetListIncludingNameOfDays()
+        {
+            List<MinDatum2> listForModel = new List<MinDatum2>();
+            var wrappertList = _dailyDetails.Select(
+                day => new MinDatum2
+                {
+                    Humidity = day.Humidity,
+                    Icon = day.Icon,
+                    Summary = day.Summary,
+                    TemperatureHigh = day.TemperatureHigh,
+                    TemperatureLow = day.TemperatureLow,
+                    WindSpeed = day.WindSpeed
+                }).ToList();
+
+            var nameOfDay = DateTime.Now;
+            foreach (var day in wrappertList)
+            {
+                day.NameOfDay = nameOfDay.DayOfWeek.ToString();
+                nameOfDay = nameOfDay.AddDays(1);
+            }
+            //var list = firstList.Select(x => { x.NameOfDay = nameOfDay.DayOfWeek.ToString(); nameOfDay.AddDays(1); });
+
+            return wrappertList;
         }
 
         public List<string> GetListWeatherDay()
@@ -87,11 +115,12 @@ namespace WeatherApp.ViewModels
             weatherDays.Add(today.DayOfWeek.ToString());
 
             // how many days do i have ahead
-            var length = WeatherForWeek.Count;
+            var length = _dailyDetails.Count;
 
             for (int i = 1; i < length; i++)
             {
-                string nameOfDay = today.AddDays(1).DayOfWeek.ToString();
+                today = today.AddDays(1);
+                string nameOfDay = today.DayOfWeek.ToString();
                 weatherDays.Add(nameOfDay);
             }
 
