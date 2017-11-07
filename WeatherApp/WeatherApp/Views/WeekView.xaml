@@ -11,72 +11,50 @@
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
             <StackLayout Grid.Column="1" HorizontalOptions="Fill">
-                <Label Text="Conect to Darksky - this week news"
-                       FontSize="Medium"/>
+                <Label Text="Conect to Darksky - The weather forecast for this week"
+                       FontSize="Medium" 
+                       HorizontalOptions="Center"/>
+
                 <Label Text="{Binding CityNameText}"
                        FontSize="Medium"
-                       HorizontalOptions="Center"/>
-                <Grid BackgroundColor="Black" HeightRequest="40">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <!--<Grid.Resources>
+                       BackgroundColor="Black"
+                       TextColor="Yellow"
+                       HorizontalOptions="Center" Margin="5"/>
+                
+                <Grid BackgroundColor="Yellow" Padding="7" Margin="4">
+                    <Grid BackgroundColor="Black" HeightRequest="200">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <!--<Grid.Resources>
                         <Style TargetType ="Label">
                             <Setter Property="TextColor" Value="Yellow"/>
                         </Style>
                     </Grid.Resources>-->
-
-                    <Label Text="Day" TextColor="Yellow" Grid.Column="0"/>
-                    <Label Text="Low Temperature" TextColor="Yellow" Grid.Column="1"/>
-                    <Label Text="High Temperature" TextColor="Yellow" Grid.Column="2"/>
-                    <Label Text="Wind Speed" TextColor="Yellow" Grid.Column="3"/>
-                    <Label Text="Icon" TextColor="Yellow" Grid.Column="4"/>
-                    <Label Text="%Humidity" TextColor="Yellow" Grid.Column="5"/>
-                    <Label Text="Summery" TextColor="Yellow" Grid.Column="6"/>
+                        <Label Text="Day" TextColor="Yellow" VerticalTextAlignment="Center" FontSize="Medium" Grid.Column="0"/>
+                        <Label Text="Low Temperature" TextColor="Yellow" FontSize="Medium" Grid.Column="1"/>
+                        <Label Text="High Temperature" TextColor="Yellow" FontSize="Medium" Grid.Column="2"/>
+                        <Label Text="Wind Speed" VerticalTextAlignment="Center" TextColor="Yellow" FontSize="Medium" Grid.Column="3"/>
+                        <Label Text="Icon"  VerticalTextAlignment="Center" TextColor="Yellow" FontSize="Medium" Grid.Column="4"/>
+                        <Label Text="%Humidity"  VerticalTextAlignment="Center" TextColor="Yellow" FontSize="Medium" Grid.Column="5"/>
+                        <Label Text="Summery"  VerticalTextAlignment="Center" TextColor="Yellow" FontSize="Medium" Grid.Column="6"/>
+                    </Grid>
                 </Grid>
-                <!--<TableView>
-                <TableView.Root>
-                    <TableSection Title="Test">
-                        <ViewCell>
-                            <ViewCell.View>
-                                <StackLayout Orientation="Vertical">
-                                    <BoxView Color="Green"></BoxView>
-                                    <StackLayout>
-                                        <Label Text="{Binding WeatherForWeek[0].TemperatureLow}"></Label>
-                                        <Label Text="News URL 1"></Label>
-                                    </StackLayout>
-                                    <BoxView x:Name="boxView" Color="Blue" ></BoxView>
-                                    <StackLayout>
-                                        <Label Text="News Item 2"></Label>
-                                        <Label Text="{Binding WeatherForWeek[1].TemperatureLow}"></Label>
-                                    </StackLayout>
-                                  
-
-                                </StackLayout>
-                            </ViewCell.View>
-                        </ViewCell>
-
-                    </TableSection>
-                </TableView.Root>
-            </TableView>-->
-
                 <StackLayout>
-                    <Label Text="{Binding DayOfWeek}" TextColor="White"/>
                     <ListView BackgroundColor="White"     
-                  
                       x:Name="weatherForWeek"
                       ItemsSource="{Binding WeatherForWeek}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
                                     <Grid BackgroundColor="Yellow" >
-                                        <Grid BackgroundColor="Black" Padding="20"  Margin="3">
+                                        <Grid BackgroundColor="Black" Padding="20"  Margin="4">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>
@@ -89,6 +67,9 @@
 
                                             <StackLayout Grid.Column="0" Margin="5">
                                                 <Label Text="{Binding NameOfDay}" TextColor="White"/>
+                                                <!--<Label Text="{Binding Date,StringFormat='{0:MMMM dd, yyyy}'}" TextColor="White"/>-->
+                                                <Label Text="{Binding Date,StringFormat='{0:dd, MMMM, yyyy}'}" TextColor="White"/>
+
                                             </StackLayout>
                                             <StackLayout  Grid.Column="1">
                                                 <Label Text="{Binding TemperatureLow}" TextColor="White" />
@@ -101,12 +82,13 @@
                                             </StackLayout>
                                             <StackLayout  Grid.Column="4">
                                                 <Label Text="{Binding Icon}" TextColor="Yellow"/>
-                                                <Image Source="https://cdn4.iconfinder.com/data/icons/round-buttons/512/black_cloud.png"
+                                                <Image Source="{Binding ImageUrlIcon}"
                                                        HeightRequest="50"
                                                        WidthRequest="50"></Image>
                                             </StackLayout>
-                                            <StackLayout  Grid.Column="5">
+                                            <StackLayout  Grid.Column="5" Orientation="Horizontal">
                                                 <Label Text="{Binding Humidity}" TextColor="White"/>
+                                                <Label Text="%" TextColor="White" HorizontalTextAlignment="Start"/>
                                             </StackLayout>
 
                                             <StackLayout  Grid.Column="6">
@@ -115,33 +97,19 @@
 
                                         </Grid>
                                     </Grid>
-                                    <!--<StackLayout Orientation="Horizontal" BackgroundColor="Black" Padding="20" Margin="2">
 
-                                        -->
-                                    <!--<Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="7*" />
-                                                <RowDefinition Height="3*"/>
-                                            </Grid.RowDefinitions>
-                                            <Label Grid.Row="0" VerticalOptions="Fill" Text="Day" TextColor="Yellow" ></Label>
-                                            <Label Grid.Row="1" VerticalOptions="Fill" Text="{Binding NameOfDay}" TextColor="White"></Label>
-                                           
-                                        </Grid>-->
-                                    <!--
-
-
-                                    </StackLayout>-->
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </StackLayout>
                 <StackLayout>
-                    <Button Text="Go Back"
+                    <Button Text="Go Back" FontSize="Medium"
                             Command="{Binding BindingContext.GoBackCommand, Source={x:Reference weatherForWeek}}}"
                             CommandParameter="{Binding .}"
                             HorizontalOptions="Fill"/>
                 </StackLayout>
+
             </StackLayout>
         </Grid>
     </ContentPage.Content>

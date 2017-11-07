@@ -9,8 +9,21 @@ using Xamarin.Forms;
 
 namespace WeatherApp.ViewModels
 {
+    // clear-day = string "http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/128/Status-weather-clear-icon.png";
+    //enum Weather
+    //{
+    //    clear-day,
+    //    clear-night,
+    //    rain,
+    //    snow,
+    //    partly-cloudy-night,
+    //    partly-cloudy-day,
+    //    cloudy
+    //}
+    
     public class WeekViewModel : ViewModelBase
     {
+        private Constants.Constants constants;
         private DayOfWeek _dayOfWeek;
         private string _cityNameText;
 
@@ -38,6 +51,8 @@ namespace WeatherApp.ViewModels
             }
         }
 
+        private Dictionary<string, string> _iconsToUrl;
+
 
         private List<MinDatum2> _weatherForWeek;
         public List<MinDatum2> WeatherForWeek
@@ -51,16 +66,7 @@ namespace WeatherApp.ViewModels
         }
 
         private ICommand _goBackCommand;
-        //public DateTime Date { get; set; }
-        //public DayOfWeek DayOfWeek
-        //{
-        //    get { return _dayOfWeek; }
-        //    set
-        //    {
-        //        _dayOfWeek = value;
-        //        OnPropertyChanged("DayOfWeek");
-        //    }
-        //}
+      
         public ICommand GoBackCommand
         {
             get { return _goBackCommand ?? (_goBackCommand = new Command(GoBackCommandAction)); }
@@ -74,12 +80,29 @@ namespace WeatherApp.ViewModels
         public WeekViewModel(string cityName, string jsonResult, List<Datum2> dailyDetails, INavigation navigation)
             : base(navigation)
         {
-
+            constants = new Constants.Constants();
             _cityNameText = cityName;
-            //_weatherForWeek = dailyDetails;
             _dailyDetails = dailyDetails;
+            //init for each day the name of the day
             WeatherDay = GetListWeatherDay();
-            WeatherForWeek = GetListIncludingNameOfDays();
+            //combine the name of days to list of view model
+            WeatherForWeek = GetListIncludingNameOfDays();          
+            AddImageAccordingToIcon();
+        }
+
+        private void AddImageAccordingToIcon()
+        {
+            foreach (var day in WeatherForWeek)
+            {
+                var icon = day.Icon;
+                string urlImageIcon;
+              
+                if (constants.IconToUrl.ContainsKey(icon))
+                {
+                    urlImageIcon = constants.IconToUrl[icon];
+                    day.ImageUrlIcon = urlImageIcon;
+                }
+            }
         }
 
         private List<MinDatum2> GetListIncludingNameOfDays()
@@ -88,7 +111,7 @@ namespace WeatherApp.ViewModels
             var wrappertList = _dailyDetails.Select(
                 day => new MinDatum2
                 {
-                    Humidity = day.Humidity,
+                    Humidity = day.Humidity*100,
                     Icon = day.Icon,
                     Summary = day.Summary,
                     TemperatureHigh = day.TemperatureHigh,
@@ -100,6 +123,8 @@ namespace WeatherApp.ViewModels
             foreach (var day in wrappertList)
             {
                 day.NameOfDay = nameOfDay.DayOfWeek.ToString();
+                //setting the date for each day.
+                day.Date = nameOfDay.Date;
                 nameOfDay = nameOfDay.AddDays(1);
             }
             //var list = firstList.Select(x => { x.NameOfDay = nameOfDay.DayOfWeek.ToString(); nameOfDay.AddDays(1); });
@@ -123,9 +148,10 @@ namespace WeatherApp.ViewModels
                 string nameOfDay = today.DayOfWeek.ToString();
                 weatherDays.Add(nameOfDay);
             }
-
+            
             return weatherDays;
         }
 
     }
 }
+

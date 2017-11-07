@@ -9,56 +9,47 @@
                    FontSize="Large"
                    TextColor="Black"/>
 
+            <Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-            <ListView VerticalOptions="Fill"
-                  HorizontalOptions="Fill"
-                  x:Name="CitiesListView"
-                  ItemsSource="{Binding GetCitiesList}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Button Text="{Binding CityName}"
+                  
+                        <StackLayout Grid.Column="1">
+                            <Image Source="http://www.dr-lex.be/software/images/ds_icons.png" HorizontalOptions="Center"/>
+                            <ListView 
+                          HorizontalOptions="Fill"
+                          x:Name="CitiesListView"
+                          ItemsSource="{Binding GetCitiesList}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid BackgroundColor="DarkGray" Padding="3" Margin="2">
+                                                <Grid BackgroundColor="LightGray">
+                                                    <Button Text="{Binding CityName}" TextColor="Black"
                                 Command="{Binding BindingContext.ShowTempCommand, Source={x:Reference CitiesListView}}}"
                                 CommandParameter="{Binding .}"
-                                HorizontalOptions="Fill"
-                                VerticalOptions="Fill"/>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <!--<ListView VerticalOptions="Fill"
-                  HorizontalOptions="Fill"
-                  x:Name="DailyListDetails"
-                  ItemsSource="{Binding DailyDetails}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Button Text="{Binding TemperatureMin}"
-                                Command="{Binding BindingContext.ShowTempCommand, Source={x:Reference DailyListDetails}}}"
-                                CommandParameter="{Binding .}"
-                                VerticalOptions="Fill"
                                 HorizontalOptions="Fill"/>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>-->
+                                                </Grid>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
-            <!--<ListView VerticalOptions="Fill"
-                      HorizontalOptions="Fill"
-                      x:Name="DailyListDetails"
-                      ItemsSource="{Binding DailyDetails}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Button Text="{Binding TemperatureMin}"
-                                Command="{Binding BindingContext.ShowTempCommand, Source={x:Reference CitiesListView}}}"
-                                CommandParameter="{Binding .}"
-                                VerticalOptions="Fill"
-                                HorizontalOptions="Fill"/>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>-->
+                        <Label Text="{Binding LoadingText}" 
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               FontSize="Medium"
+                               TextColor="Red"/>
+                    </StackLayout>
+
+                 
+                </Grid>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

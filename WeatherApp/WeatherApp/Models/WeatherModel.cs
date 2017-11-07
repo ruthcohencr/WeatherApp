@@ -181,6 +181,8 @@ namespace WeatherApp.Models
         public double Humidity { get; set; }
         public double WindSpeed { get; set; }
         public string NameOfDay { get; set; }
+        public string ImageUrlIcon { get; set; }
+        public DateTime Date { get; set; }
     }
 
     public class Datum2
